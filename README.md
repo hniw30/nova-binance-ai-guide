@@ -10,8 +10,6 @@ Web3 Guide · Live Dubbing · Fake News Detector · KOL Feed · Smart Reminders
 
 **4 Languages:** English · Tiếng Việt · 中文 · Türkçe
 
-## Live Demo
-→ [Click here to open NOVA demo](YOUR_DEMO_LINK_HERE)
 
 ## How to Run Locally
 1. Download `NOVA_ultimate.html`
