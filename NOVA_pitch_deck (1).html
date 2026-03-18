@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✦ NOVA — Pitch Deck | OpenClaw 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #05080f;
+  --surface: #0a1020;
+  --card: #0f1828;
+  --border: #1a2a40;
+  --gold: #F0B90B;
+  --gold2: #ffd84d;
+  --cyan: #00d4aa;
+  --blue: #4d9fff;
+  --danger: #ff4d6d;
+  --purple: #8b5cf6;
+  --text: #f0f4ff;
+  --muted: #6b8aad;
+  --dim: #2a3a50;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* ── BACKGROUND ── */
+.bg-layer {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+}
+.bg-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(240,185,11,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240,185,11,0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+.bg-glow {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 30%, rgba(240,185,11,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 70%, rgba(0,212,170,0.05) 0%, transparent 60%);
+}
+
+/* ── SLIDES ── */
+.deck { position: relative; z-index: 1; height: 100vh; }
+
+.slide {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  padding: 0 8vw;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateX(60px);
+}
+.slide.active {
+  opacity: 1; pointer-events: all;
+  transform: translateX(0);
+}
+.slide.exit {
+  opacity: 0; transform: translateX(-60px);
+}
+
+/* ── HEADER BAR ── */
+.slide-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 0 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+.logo-mark {
+  font-family: 'DM Mono', monospace;
+  font-size: .75rem; color: var(--gold);
+  letter-spacing: 2px; display: flex; align-items: center; gap: 8px;
+}
+.logo-mark span { color: var(--muted); }
+.slide-num {
+  font-family: 'DM Mono', monospace;
+  font-size: .7rem; color: var(--muted);
+}
+
+/* ── SLIDE CONTENT ── */
+.slide-body {
+  flex: 1; display: flex; flex-direction: column;
+  justify-content: center; padding: 30px 0 20px;
+  overflow: hidden;
+}
+
+/* ── TYPOGRAPHY ── */
+.eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: .65rem; color: var(--gold);
+  letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 14px;
+}
+h1.hero {
+  font-family: 'Clash Display', sans-serif;
+  font-size: clamp(3rem, 7vw, 6rem);
+  font-weight: 700; line-height: 1;
+  color: var(--text); letter-spacing: -2px;
+  margin-bottom: 8px;
+}
+h1.hero .gold { color: var(--gold); }
+h2.section-title {
+  font-family: 'Clash Display', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  font-weight: 600; line-height: 1.1;
+  color: var(--text); margin-bottom: 8px;
+}
+h2.section-title .accent { color: var(--gold); }
+.subtitle {
+  font-size: clamp(.9rem, 1.8vw, 1.1rem);
+  color: var(--muted); line-height: 1.6;
+  max-width: 580px; margin-bottom: 24px;
+}
+.tagline {
+  font-family: 'Clash Display', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  color: var(--cyan); font-style: italic;
+  margin-bottom: 28px;
+}
+
+/* ── BADGES ── */
+.badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+.badge {
+  font-family: 'DM Mono', monospace; font-size: .62rem;
+  padding: 5px 12px; border-radius: 100px;
+  letter-spacing: .5px;
+}
+.badge-gold { background: rgba(240,185,11,.12); border: 1px solid rgba(240,185,11,.3); color: var(--gold); }
+.badge-cyan { background: rgba(0,212,170,.1); border: 1px solid rgba(0,212,170,.3); color: var(--cyan); }
+.badge-blue { background: rgba(77,159,255,.1); border: 1px solid rgba(77,159,255,.3); color: var(--blue); }
+.badge-purple { background: rgba(139,92,246,.1); border: 1px solid rgba(139,92,246,.3); color: var(--purple); }
+
+/* ── CARDS GRID ── */
+.cards-grid { display: grid; gap: 12px; }
+.cards-2 { grid-template-columns: 1fr 1fr; }
+.cards-3 { grid-template-columns: 1fr 1fr 1fr; }
+.cards-4 { grid-template-columns: repeat(4, 1fr); }
+
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 18px 20px;
+  transition: border-color .2s;
+}
+.card:hover { border-color: rgba(240,185,11,.3); }
+.card-icon { font-size: 1.6rem; margin-bottom: 10px; }
+.card-title {
+  font-family: 'Clash Display', sans-serif;
+  font-size: .9rem; font-weight: 600;
+  color: var(--text); margin-bottom: 5px;
+}
+.card-desc { font-size: .75rem; color: var(--muted); line-height: 1.5; }
+
+/* ── STAT CARDS ── */
+.stat-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 20px; text-align: center;
+}
+.stat-val {
+  font-family: 'Clash Display', sans-serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+  font-weight: 700; color: var(--gold);
+  line-height: 1; margin-bottom: 6px;
+}
+.stat-label { font-size: .7rem; color: var(--muted); letter-spacing: .5px; }
+
+/* ── TABLE ── */
+.nova-table { width: 100%; border-collapse: collapse; font-size: .78rem; }
+.nova-table th {
+  text-align: left; padding: 8px 14px;
+  font-family: 'DM Mono', monospace; font-size: .62rem;
+  color: var(--gold); letter-spacing: 1px;
+  border-bottom: 1px solid var(--border);
+}
+.nova-table td {
+  padding: 10px 14px; border-bottom: 1px solid var(--dim);
+  color: var(--muted); vertical-align: top; line-height: 1.5;
+}
+.nova-table td:first-child { color: var(--text); font-weight: 500; white-space: nowrap; }
+.nova-table tr:last-child td { border-bottom: none; }
+
+/* ── SKILL PILLS ── */
+.skills-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+.skill-pill {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px 14px;
+  font-family: 'DM Mono', monospace; font-size: .65rem;
+  color: var(--muted); display: flex; align-items: center; gap: 6px;
+  transition: all .2s;
+}
+.skill-pill:hover { border-color: var(--gold); color: var(--gold); }
+.skill-pill.new { border-color: rgba(139,92,246,.4); color: var(--purple); }
+.skill-pill .badge-new {
+  font-size: .45rem; background: var(--purple); color: #fff;
+  padding: 1px 5px; border-radius: 3px;
+}
+
+/* ── PROBLEM CARDS ── */
+.problem-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px 18px;
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.prob-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+.prob-title { font-weight: 600; font-size: .85rem; color: var(--text); margin-bottom: 4px; }
+.prob-desc { font-size: .73rem; color: var(--muted); line-height: 1.5; }
+
+/* ── TIMELINE ── */
+.timeline { display: flex; gap: 0; }
+.phase {
+  flex: 1; background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 18px; position: relative;
+}
+.phase + .phase { border-left: none; border-radius: 0 12px 12px 0; }
+.phase:first-child { border-radius: 12px 0 0 12px; }
+.phase-label {
+  font-family: 'DM Mono', monospace; font-size: .58rem;
+  color: var(--gold); letter-spacing: 1px; margin-bottom: 6px;
+}
+.phase-title { font-weight: 600; font-size: .82rem; color: var(--text); margin-bottom: 10px; }
+.phase-item { font-size: .7rem; color: var(--muted); margin-bottom: 4px; display: flex; gap: 6px; }
+.phase-item::before { content: '✓'; color: var(--cyan); flex-shrink: 0; }
+.phase.future .phase-item::before { content: '→'; color: var(--blue); }
+
+/* ── DEMO FLOW ── */
+.demo-steps { display: flex; flex-direction: column; gap: 8px; }
+.demo-step {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 16px;
+}
+.step-num {
+  font-family: 'DM Mono', monospace; font-size: .7rem;
+  color: var(--gold); min-width: 24px;
+}
+.step-time { font-family: 'DM Mono', monospace; font-size: .62rem; color: var(--muted); min-width: 80px; }
+.step-desc { font-size: .75rem; color: var(--text); }
+
+/* ── HERO SLIDE SPECIAL ── */
+.hero-tagline {
+  font-family: 'Clash Display', sans-serif;
+  font-size: clamp(.85rem, 1.8vw, 1.15rem);
+  color: var(--cyan); font-style: italic;
+  border-left: 3px solid var(--gold);
+  padding-left: 16px; margin: 20px 0 28px;
+  max-width: 600px;
+}
+.hero-meta {
+  font-family: 'DM Mono', monospace; font-size: .65rem;
+  color: var(--muted); letter-spacing: 1px;
+}
+
+/* ── FEATURE ROW ── */
+.feature-row {
+  display: flex; gap: 10px; flex-wrap: wrap;
+}
+.feat {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 9px; padding: 10px 14px;
+  font-size: .75rem; color: var(--text); flex: 1; min-width: 160px;
+}
+.feat-icon { font-size: 1.1rem; }
+
+/* ── CLOSING SLIDE ── */
+.closing-center {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; height: 100%;
+}
+.big-star {
+  font-size: 4rem; margin-bottom: 20px;
+  animation: spin-slow 8s linear infinite;
+}
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+
+/* ── NAV ── */
+nav {
+  position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 16px; z-index: 100;
+  background: rgba(10,16,32,.9); border: 1px solid var(--border);
+  border-radius: 100px; padding: 10px 20px;
+  backdrop-filter: blur(16px);
+}
+.nav-btn {
+  background: none; border: none; cursor: pointer;
+  color: var(--muted); font-size: 1.1rem;
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+}
+.nav-btn:hover { background: rgba(240,185,11,.1); color: var(--gold); }
+.nav-btn:disabled { opacity: .3; cursor: not-allowed; }
+.nav-dots { display: flex; gap: 6px; align-items: center; }
+.nav-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--dim); cursor: pointer; transition: all .2s;
+}
+.nav-dot.active { background: var(--gold); width: 20px; border-radius: 3px; }
+.nav-progress {
+  font-family: 'DM Mono', monospace; font-size: .65rem; color: var(--muted);
+}
+
+/* ── KEYBOARD HINT ── */
+.key-hint {
+  position: fixed; bottom: 28px; right: 28px; z-index: 100;
+  font-family: 'DM Mono', monospace; font-size: .6rem; color: var(--dim);
+}
+
+/* ── QUOTE BOX ── */
+.quote-box {
+  background: rgba(240,185,11,.05); border: 1px solid rgba(240,185,11,.2);
+  border-left: 3px solid var(--gold); border-radius: 0 10px 10px 0;
+  padding: 14px 18px; font-style: italic;
+  color: var(--muted); font-size: .82rem; line-height: 1.6;
+  margin: 14px 0;
+}
+
+/* ── WHY WIN ── */
+.why-item {
+  display: flex; gap: 16px; align-items: flex-start;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 18px 20px; margin-bottom: 10px;
+}
+.why-num {
+  font-family: 'Clash Display', sans-serif; font-size: 2rem;
+  font-weight: 700; color: var(--gold); opacity: .3;
+  line-height: 1; flex-shrink: 0; width: 40px;
+}
+.why-title { font-weight: 600; font-size: .88rem; color: var(--text); margin-bottom: 4px; }
+.why-desc { font-size: .74rem; color: var(--muted); line-height: 1.5; }
+
+@media (max-width: 700px) {
+  .cards-3, .cards-4 { grid-template-columns: 1fr 1fr; }
+  .cards-2 { grid-template-columns: 1fr; }
+  h1.hero { font-size: 2.8rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-layer">
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+</div>
+
+<div class="deck" id="deck">
+
+  <!-- SLIDE 1: TITLE -->
+  <div class="slide active" data-slide="1">
+    <div class="slide-header">
+      <div class="logo-mark">✦ NOVA <span>· OpenClaw 2026</span></div>
+      <div class="slide-num">01 / 12</div>
+    </div>
+    <div class="slide-body" style="justify-content:center;">
+      <div class="eyebrow">OpenClaw AI Innovation Competition 2026</div>
+      <h1 class="hero"><span class="gold">NOVA</span></h1>
+      <div class="tagline">Your Global Binance AI Guide</div>
+      <div class="hero-tagline">
+        "Binance speaks every language.<br>Now it finally understands yours."
+      </div>
+      <div class="badges">
+        <span class="badge badge-gold">12 Binance AI Skills</span>
+        <span class="badge badge-cyan">8 Features</span>
+        <span class="badge badge-blue">4 Languages</span>
+        <span class="badge badge-purple">Claude Sonnet 4</span>
+      </div>
+      <div class="hero-meta">💬 AI Chat · 🎙️ Voice Call · 📺 Live Dubbing · 🌐 Web3 Guide · 🔍 Fact-Check</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: THE PROBLEM -->
+  <div class="slide" data-slide="2">
+    <div class="slide-header">
+      <div class="logo-mark">✦ NOVA <span>· The Problem</span></div>
+      <div class="slide-num">02 / 12</div>
+    </div>
+    <div class="slide-body">
+      <div class="eyebrow">The Problem</div>
+      <h2 class="section-title">Millions of new crypto users<br>are <span class="accent">lost on Binance</span></h2>
+      <div class="cards-grid cards-2" style="margin-top:20px;">
+        <div class="problem-card">
+          <div class="prob-icon">🌍</div>
+          <div>
+            <div class="prob-title">Language Barrier</div>
+            <div class="prob-desc">65% of Binance's growth comes from non-English markets. The interface is complex and jargon-heavy.</div>
+          </div>
+        </div>
+        <div class="problem-card">
+          <div class="prob-icon">😰</div>
+          <div>
+            <div class="prob-title">Feature Overwhelm</div>
+            <div class="prob-desc">Spot, Futures, P2P, Earn, Web3, Square — new users don't know where to start or what's safe.</div>
+          </div>
+        </div>
+        <div class="problem-card">
+          <div class="prob-icon">🚨</div>
+          <div>
+            <div class="prob-title">Scam Vulnerability</div>
+            <div class="prob-desc">P2P fraud, phishing dApps, fake airdrops — beginners lose money within their first week.</div>
+          </div>
+        </div>
+        <div class="problem-card">
+          <div class="prob-icon">📵</div>
+          <div>
+            <div class="prob-title">24/7 Support Gap</div>
+            <div class="prob-desc">Binance support has queues. Users need instant guidance at the exact moment they're about to make a mistake.</div>
+          </div>
+        </div>
+      </div>
+      <div class="quote-box" style="margin-top:14px;">
+        With EU MiCA 2025 and global crypto regulation in 2026, millions of first-time users will flood Binance.
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: THE SOLUTION -->
+  <div class="slide" data-slide="3">
+    <div class="slide-header">
+      <div class="logo-mark">✦ NOVA <span>· The Solution</span></div>
+      <div class="slide-num">03 / 12</div>
+    </div>
+    <div class="slide-body">
+      <div class="eyebrow">The Solution</div>
+      <h2 class="section-title">A small AI widget.<br>A <span class="accent">giant leap</span> for Binance users.</h2>
+      <div class="cards-grid cards-3" style="margin-top:20px;">
+        <div class="card">
+          <div class="card-icon">📍</div>
+          <div class="card-title">Lives in the Corner</div>
+          <div class="card-desc">Tiny 60×60px widget — never covers Binance content. Always accessible.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🛡️</div>
+          <div class="card-title">Always Protective</div>
+          <div class="card-desc">Warns before mistakes. Flags scams instantly. Acts before damage is done.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">👁️</div>
+          <div class="card-title">Screen-Aware</div>
+          <div class="card-desc">Sees what you're viewing on Binance, proactively offers relevant help.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎯</div>
+          <div class="card-title">Personalized</div>
+          <div class="card-desc">Adapts to beginner, intermediate, or expert from the very first session.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🌍</div>
+          <div class="card-title">Multilingual</div>
+          <div class="card-desc">Auto-detects and responds in your language. EN · VI · ZH · TR and more.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <div class="card-title">12 AI Skills</div>
+          <div class="card-desc">Powered by Binance's own official AI Agent Skills — all 12 of them.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: FEATURES -->
+  <div class="slide" data-slide="4">
+    <div class="slide-header">
+      <div class="logo-mark">✦ NOVA <span>· Features</span></div>
+      <div class="slide-num">04 / 12</div>
+    </div>
+    <div class="slide-body">
+      <div class="eyebrow">8 Features</div>
+      <h2 class="section-title">Everything a global Binance user<br>needs, <span class="accent">in one widget</span></h2>
+      <div class="cards-grid cards-4" style="margin-top:18px;">
+        <div class="card" style="padding:14px 16px;">
+          <div class="card-icon">💬</div>
+          <div class="card-title">AI Chat</div>
+          <div class="card-desc">Claude-powered. Remembers context. 12+ languages.</div>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <div class="card-icon">🎙️</div>
+          <div class="card-title">Voice Call</div>
+          <div class="card-desc">Speak naturally. NOVA listens and replies in your language.</div>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <div class="card-icon">📊</div>
+          <div class="card-title">Coin Intelligence</div>
+          <div class="card-desc">12 Binance AI Skills scan any coin in real-time.</div>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <div class="card-icon">🌐</div>
+          <div class="card-title">Web3 Guide</div>
+          <div class="card-desc">Wallet, bridge, dApps, approvals, scams — step by step.</div>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <div class="card-icon">📺</div>
+          <div class="card-title">Live Dubbing</div>
+          <div class="card-desc">Subtitle + dub Binance Square lives in your language.</div>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <div class="card-icon">🔍</div>
+          <div class="card-title">Fact-Check</div>
+          <div class="card-desc">Detects fake news, scam posts, unverified claims instantly.</div>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <div class="card-icon">⭐</div>
+          <div class="card-title">KOL Feed</div>
+          <div class="card-desc">Follow KOLs. NOVA translates their posts in real-time.</div>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <div class="card-icon">🔔</div>
+          <div class="card-title">Smart Reminders</div>
+          <div class="card-desc">Scheduled tasks, incomplete flows, interaction history.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: COIN INTELLIGENCE -->
+  <div class="slide" data-slide="5">
+    <div class="slide-header">
+      <div class="logo-mark">✦ NOVA <span>· Coin Intelligence</span></div>
+      <div class="slide-num">05 / 12</div>
+    </div>
+    <div class="slide-body">
+      <div class="eyebrow">📊 Coin Intelligence</div>
+      <h2 class="section-title">12 Real Binance AI Skills<br><span class="accent">launched March 2026</span></h2>
+      <div style="margin-top:16px;">
+        <div style="font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);letter-spacing:1px;margin-bottom:8px;">BATCH 1 — ORIGINAL 7 SKILLS</div>
+        <div class="skills-grid">
+          <div class="skill-pill">📊 Binance Spot</div>
+          <div class="skill-pill">👜 Binance Wallet</div>
+          <div class="skill-pill">🔍 Query Address Info</div>
+          <div class="skill-pill">🪙 Query Token Info</div>
+          <div class="skill-pill">🏆 Market Ranking</div>
+          <div class="skill-pill">🐋 Smart Fund Signal</div>
+          <div class="skill-pill">🛡️ Contract Risk Detection</div>
+        </div>
+        <div style="font-family:'DM Mono',monospace;font-size:.62rem;color:var(--purple);letter-spacing:1px;margin:14px 0 8px;">MARCH 2026 EXPANSION — 4 NEW SKILLS</div>
+        <div class="skills-grid">
+          <div class="skill-pill new">🌐 Binance Alpha <span class="badge-new">NEW</span></div>
+          <div class="skill-pill new">📈 USD-M Futures <span class="badge-new">NEW</span></div>
+          <div class="skill-pill new">💳 Margin Trading <span class="badge-new">NEW</span></div>
+          <div class="skill-pill new">💼 Asset Management <span class="badge-new">NEW</span></div>
+        </div>
+        <div style="font-family:'DM Mono',monospace;font-size:.62rem;color:var(--cyan);letter-spacing:1px;margin:14px 0 8px;">NOVA+ LAYER</div>
+        <div class="skills-grid">
+          <div class="skill-pill" style="border-color:rgba(0,212,170,.3);color:var(--cyan);">📰 News & Sentiment Monitor</div>
+        </div>
+      </div>
+      <div class="quote-box" style="margin-top:16px;">
+        Result: Verdict (SAFE / CAUTION / HIGH RISK / DANGER) + 4 scores + 7 analysis sections + expert NOVA verdict.
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: ONBOARDING -->
+  <div class="slide" data-slide="6">
+    <div class="slide-header">
+      <div class="logo-mark">✦ NOVA <span>· Onboarding</span></div>
+      <div class="slide-num">06 / 12</div>
+    </div>
+    <div class="slide-body">
+      <div class="eyebrow">Personalization</div>
+      <h2 class="section-title">Personalized from<br><span class="accent">second one</span></h2>
+      <div class="cards-grid cards-3" style="margin-top:20px;">
+        <div class="card" style="border-color:rgba(240,185,11,.3);">
+          <div style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--gold);margin-bottom:10px;">STEP 1</div>
+          <div class="card-title">Experience Level?</div>
+          <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px;">
+            <div style="background:rgba(240,185,11,.1);border:1px solid rgba(240,185,11,.3);border-radius:7px;padding:6px 12px;font-size:.72rem;color:var(--gold);">● Beginner</div>
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:6px 12px;font-size:.72rem;color:var(--muted);">○ Intermediate</div>
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:6px 12px;font-size:.72rem;color:var(--muted);">○ Advanced</div>
+          </div>
+        </div>
+        <div class="card" style="border-color:rgba(0,212,170,.3);">
+          <div style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--cyan);margin-bottom:10px;">STEP 2</div>
+          <div class="card-title">Main Interest?</div>
+          <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;">
+            <span style="background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.3);border-radius:7px;padding:5px 10px;font-size:.68rem;color:var(--cyan);">📊 Analyze</span>
+            <span style="background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:5px 10px;font-size:.68rem;color:var(--muted);">💹 Trading</span>
+            <span style="background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:5px 10px;font-size:.68rem;color:var(--muted);">💰 Earn</span>
+            <span style="background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:5px 10px;font-size:.68rem;color:var(--muted);">🤝 P2P</span>
+            <span style="background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:5px 10px;font-size:.68rem;color:var(--muted);">🌐 Web3</span>
+          </div>
+        </div>
+        <div class="card" style="border-color:rgba(77,159,255,.3);">
+          <div style="font-family:'DM Mono',monospace;font-size:.6rem;color:var(--blue);margin-bottom:10px;">STEP 3</div>
+          <div class="card-title">Preferred Language?</div>
+          <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px;">
+            <div style="background:rgba(77,159,255,.1);border:1px solid rgba(77,159,255,.3);border-radius:7px;padding:6px 12px;font-size:.72rem;color:var(--blue);">🇺🇸 English</div>
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:6px 12px;font-size:.72rem;color:var(--muted);">🇻🇳 Tiếng Việt</div>
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:6px 12px;font-size:.72rem;color:var(--muted);">🇨🇳 中文 &nbsp; 🇹🇷 Türkçe</div>
+          </div>
+        </div>
+      </div>
+      <div class="quote-box" style="margin-top:14px;">
+        Result: NOVA adjusts tone, explanations, features shown, and first message — all personalized automatically.
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: VOICE & LIVE -->
+  <div class="slide" data-slide="7">
+    <div class="slide-header">
+      <div class="logo-mark">✦ NOVA <span>· Voice & Live</span></div>
+      <div class="slide-num">07 / 12</div>
+    </div>
+    <div class="slide-body">
+      <div class="eyebrow">Voice & Live</div>
+      <h2 class="section-title">Talk to NOVA. Watch Binance Square<br><span class="accent">in your language.</span></h2>
+      <div class="cards-grid cards-2" style="margin-top:20px;">
+        <div class="card">
+          <div style="font-family:'DM Mono',monospace;font-size:.62rem;color:var(--cyan);margin-bottom:12px;letter-spacing:1px;">🎙️ VOICE CALL</div>
+          <div class="card-desc" style="font-size:.78rem;margin-bottom:12px;">Real phone-call feeling. NOVA listens, understands, responds in your language. When active, shrinks to a pill — never blocks the screen.</div>
+          <div style="background:rgba(0,212,170,.07);border:1px solid rgba(0,212,170,.2);border-radius:8px;padding:12px;font-family:'DM Mono',monospace;font-size:.65rem;color:var(--cyan);">
+            ✦ NOVA VOICE · Listening...<br>
+            <span style="color:var(--muted);">— collapses to 230px pill when active</span>
+          </div>
+        </div>
+        <div class="card">
+          <div style="font-family:'DM Mono',monospace;font-size:.62rem;color:var(--gold);margin-bottom:12px;letter-spacing:1px;">📺 LIVE SUBTITLE & DUBBING</div>
+          <div class="card-desc" style="font-size:.78rem;margin-bottom:12px;">Binance Square live streams translated in real-time. 3 modes: Subtitle · Dubbing · Both.</div>
+          <div style="background:rgba(240,185,11,.07);border:1px solid rgba(240,185,11,.2);border-radius:8px;padding:12px;font-size:.65rem;">
+            <span style="color:var(--danger);">🔴 LIVE</span> <span style="color:var(--text);">👑 CZ Binance · 42,817 viewers</span><br><br>
+            <span style="color:var(--muted);">"BTC just broke 65K resistance..."</span><br>
+            <span style="color:var(--gold);">✦ NOVA: "BTC vừa phá kháng cự 65K..."</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: SAFETY & WEB3 -->
+  <div class="slide" data-slide="8">
+    <div class="slide-header">
+      <div class="logo-mark">✦ NOVA <span>· Safety & Web3</span></div>
+      <div class="slide-num">08 / 12</div>
+    </div>
+    <div class="slide-body">
+      <div class="eyebrow">Safety & Web3</div>
+      <h2 class="section-title">The two areas where beginners<br>lose money most — <span class="accent">now fully covered</span></h2>
+      <div class="cards-grid cards-2" style="margin-top:20px;">
+        <div class="card">
+          <div style="font-family:'DM Mono',monospace;font-size:.62rem;color:var(--blue);margin-bottom:10px;letter-spacing:1px;">🌐 WEB3 GUIDE</div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div style="font-size:.72rem;color:var(--text);">👜 Web3 Wallet Setup</div>
+            <div style="font-size:.72rem;color:var(--text);">🌉 Bridge & Cross-Chain</div>
+            <div style="font-size:.72rem;color:var(--text);">⚡ dApps & DeFi</div>
+            <div style="font-size:.72rem;color:var(--gold);font-weight:600;">🛡️ Token Approvals ← #1 Drain Risk</div>
+            <div style="font-size:.72rem;color:var(--text);">⛽ Gas Fees</div>
+            <div style="font-size:.72rem;color:var(--text);">🚨 Scam Patterns</div>
+          </div>
+        </div>
+        <div class="card">
+          <div style="font-family:'DM Mono',monospace;font-size:.62rem;color:var(--danger);margin-bottom:10px;letter-spacing:1px;">🔍 FAKE NEWS DETECTOR</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="background:rgba(255,77,109,.08);border:1px solid rgba(255,77,109,.2);border-radius:8px;padding:8px 12px;">
+              <div style="font-size:.68rem;color:var(--muted);">"Binance shutting down in Asia"</div>
+              <div style="font-size:.75rem;color:var(--danger);font-weight:700;margin-top:3px;">94% FAKE</div>
+            </div>
+            <div style="background:rgba(255,77,109,.08);border:1px solid rgba(255,77,109,.2);border-radius:8px;padding:8px 12px;">
+              <div style="font-size:.68rem;color:var(--muted);">"Free airdrop — connect wallet now"</div>
+              <div style="font-size:.75rem;color:var(--danger);font-weight:700;margin-top:3px;">98% SCAM</div>
+            </div>
+            <div style="background:rgba(240,185,11,.08);border:1px solid rgba(240,185,11,.2);border-radius:8px;padding:8px 12px;">
+              <div style="font-size:.68rem;color:var(--muted);">"BTC will hit $1M in 2026"</div>
+              <div style="font-size:.75rem;color:var(--gold);font-weight:700;margin-top:3px;">41% Unverified</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: TECHNOLOGY -->
+  <div class="slide" data-slide="9">
+    <div class="slide-header">
+      <div class="logo-mark">✦ NOVA <span>· Technology</span></div>
+      <div class="slide-num">09 / 12</div>
+    </div>
+    <div class="slide-body">
+      <div class="eyebrow">Architecture</div>
+      <h2 class="section-title">Built on real APIs —<br><span class="accent">production-ready</span></h2>
+      <table class="nova-table" style="margin-top:18px;">
+        <thead>
+          <tr><th>Layer</th><th>Stack</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>🖥️ Frontend</td>
+            <td>Single HTML file · Zero dependencies · Mobile-first · Embeds with one &lt;script&gt; tag</td>
+          </tr>
+          <tr>
+            <td>🤖 AI Layer</td>
+            <td>Claude Sonnet 4 · Context-aware · Personalized system prompt per user level · JSON output</td>
+          </tr>
+          <tr>
+            <td>⚡ Binance Skills</td>
+            <td>All 12 official Binance AI Agent Skills · Alpha · Futures · Contract Risk · Asset Mgmt</td>
+          </tr>
+          <tr>
+            <td>🎙️ Voice & Media</td>
+            <td>Web Speech API (STT, Chrome native) · Browser TTS · Production: ElevenLabs multilingual</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="cards-grid cards-4" style="margin-top:14px;">
+        <div class="stat-card"><div class="stat-val">400</div><div class="stat-label">Chat tokens</div></div>
+        <div class="stat-card"><div class="stat-val">1.4K</div><div class="stat-label">Coin scan tokens</div></div>
+        <div class="stat-card"><div class="stat-val">160</div><div class="stat-label">Voice tokens</div></div>
+        <div class="stat-card"><div class="stat-val">~2.5K</div><div class="stat-label">Lines of code</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 10: MARKET OPPORTUNITY -->
+  <div class="slide" data-slide="10">
+    <div class="slide-header">
+      <div class="logo-mark">✦ NOVA <span>· Market Opportunity</span></div>
+      <div class="slide-num">10 / 12</div>
+    </div>
+    <div class="slide-body">
+      <div class="eyebrow">Market Opportunity</div>
+      <h2 class="section-title">The timing has never been<br><span class="accent">better</span></h2>
+      <div class="cards-grid cards-4" style="margin-top:18px;">
+        <div class="stat-card"><div class="stat-val">185M+</div><div class="stat-label">Binance registered users</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:var(--cyan);">65%</div><div class="stat-label">Growth from non-English markets</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:var(--danger);">$2B+</div><div class="stat-label">Lost to scams in 2025</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:var(--purple);">2026</div><div class="stat-label">Global crypto regulation wave</div></div>
+      </div>
+      <div class="cards-grid cards-3" style="margin-top:12px;">
+        <div class="card">
+          <div class="card-icon">🏆</div>
+          <div class="card-title">User Retention</div>
+          <div class="card-desc">Guided beginners churn significantly less → higher lifetime value for Binance.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">💰</div>
+          <div class="card-title">Revenue Impact</div>
+          <div class="card-desc">Guided users graduate to Futures/Margin → higher fee margins at scale.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🌍</div>
+          <div class="card-title">Global Reach</div>
+          <div class="card-desc">SEA, LATAM, MENA — fastest growing markets, most underserved by current UX.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 11: ROADMAP -->
+  <div class="slide" data-slide="11">
+    <div class="slide-header">
+      <div class="logo-mark">✦ NOVA <span>· Roadmap</span></div>
+      <div class="slide-num">11 / 12</div>
+    </div>
+    <div class="slide-body">
+      <div class="eyebrow">Roadmap</div>
+      <h2 class="section-title">From competition demo<br>to <span class="accent">production deployment</span></h2>
+      <div class="timeline" style="margin-top:22px;">
+        <div class="phase">
+          <div class="phase-label">PHASE 1 · Q1 2026</div>
+          <div class="phase-title">✓ Now — Competition Demo</div>
+          <div class="phase-item">Full demo (8 features)</div>
+          <div class="phase-item">Claude API integration</div>
+          <div class="phase-item">12 Binance AI Skills</div>
+          <div class="phase-item">Voice + Live Dubbing</div>
+          <div class="phase-item">Onboarding personalization</div>
+        </div>
+        <div class="phase future">
+          <div class="phase-label">PHASE 2 · Q2 2026</div>
+          <div class="phase-title">→ Binance Integration</div>
+          <div class="phase-item">Binance app SDK</div>
+          <div class="phase-item">Real Square API feed</div>
+          <div class="phase-item">ElevenLabs voice dubbing</div>
+          <div class="phase-item">Live Skills API calls</div>
+          <div class="phase-item">Push notifications</div>
+        </div>
+        <div class="phase future">
+          <div class="phase-label">PHASE 3 · Q3–Q4 2026</div>
+          <div class="phase-title">→ Scale</div>
+          <div class="phase-item">14+ language support</div>
+          <div class="phase-item">Agentic trading assistance</div>
+          <div class="phase-item">Social trading features</div>
+          <div class="phase-item">Enterprise / B2B tier</div>
+          <div class="phase-item">Mobile app integration</div>
+        </div>
+      </div>
+      <div class="quote-box" style="margin-top:14px;">
+        ⚡ NOVA's architecture is framework-agnostic — can be embedded in any exchange or financial app, not just Binance.
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 12: CLOSING -->
+  <div class="slide" data-slide="12">
+    <div class="slide-header">
+      <div class="logo-mark">✦ NOVA <span>· Why NOVA Wins</span></div>
+      <div class="slide-num">12 / 12</div>
+    </div>
+    <div class="slide-body">
+      <div class="eyebrow">Why NOVA Wins</div>
+      <h2 class="section-title" style="margin-bottom:20px;">Three things no other<br>crypto AI <span class="accent">does</span></h2>
+      <div class="why-item">
+        <div class="why-num">1</div>
+        <div>
+          <div class="why-title">Embedded in the product, not next to it</div>
+          <div class="why-desc">NOVA lives inside Binance's interface, knows what the user is looking at, and acts proactively — not reactively. It's a co-pilot, not a chatbot.</div>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-num">2</div>
+        <div>
+          <div class="why-title">Uses Binance's own infrastructure</div>
+          <div class="why-desc">The 12 AI Agent Skills that Binance launched in March 2026 were built to enable exactly this kind of product. NOVA is their natural consumer-facing application.</div>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-num">3</div>
+        <div>
+          <div class="why-title">Removes the language barrier — for real</div>
+          <div class="why-desc">A Vietnamese user getting Futures explained in Tiếng Việt. A Turkish user watching CZ's live stream in Türkçe. These are real people with real value to Binance.</div>
+        </div>
+      </div>
+      <div class="quote-box" style="margin-top:14px;font-size:.88rem;color:var(--text);">
+        "Binance speaks every language. Now it finally understands yours." &nbsp;—&nbsp; <strong style="color:var(--gold);">✦ NOVA</strong>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /deck -->
+
+<!-- NAV -->
+<nav>
+  <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>←</button>
+  <div class="nav-dots" id="navDots"></div>
+  <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">→</button>
+  <div class="nav-progress" id="navProg">1 / 12</div>
+</nav>
+
+<div class="key-hint">← → or click dots</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const dotsEl = document.getElementById('navDots');
+const total = slides.length;
+let current = 0;
+
+// Build dots
+slides.forEach((_,i) => {
+  const d = document.createElement('div');
+  d.className = 'nav-dot' + (i===0?' active':'');
+  d.onclick = () => goTo(i);
+  dotsEl.appendChild(d);
+});
+
+function goTo(idx) {
+  slides[current].classList.remove('active');
+  slides[current].classList.add('exit');
+  setTimeout(() => slides[current].classList.remove('exit'), 500);
+  current = idx;
+  slides[current].classList.add('active');
+  document.querySelectorAll('.nav-dot').forEach((d,i) => d.classList.toggle('active', i===current));
+  document.getElementById('prevBtn').disabled = current === 0;
+  document.getElementById('nextBtn').disabled = current === total-1;
+  document.getElementById('navProg').textContent = `${current+1} / ${total}`;
+}
+
+function changeSlide(dir) {
+  const next = current + dir;
+  if (next >= 0 && next < total) goTo(next);
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+});
+
+// Touch swipe
+let touchX = 0;
+document.addEventListener('touchstart', e => touchX = e.touches[0].clientX);
+document.addEventListener('touchend', e => {
+  const diff = touchX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) changeSlide(diff > 0 ? 1 : -1);
+});
+</script>
+</body>
+</html>
