@@ -1,6 +1,6 @@
 # ✦ NOVA — Your Global Binance AI Guide
 ## 🎯 [👉 PITCH DECK LIVE](https://nova-slide.netlify.app)
-## 🎯 [👉 NOVE BINANCE DEMO](https://nova-slide.netlify.app](https://nova-hniw30-binance.netlify.app/)
+### 🎯 [👉 NOVE BINANCE DEMO](https://nova-slide.netlify.app](https://nova-hniw30-binance.netlify.app/)
 > *"Binance speaks every language. Now it finally understands yours."*
 
 [](https://github.com/binance/binance-skills-hub)
