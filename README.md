@@ -1,5 +1,5 @@
 # ✦ NOVA — Your Global Binance AI Guide
-
+## 🎯 [Xem Pitch Deck →](NOVA_pitch_deck.html)
 > *"Binance speaks every language. Now it finally understands yours."*
 
 [](https://github.com/binance/binance-skills-hub)
