@@ -1,5 +1,5 @@
 # ✦ NOVA — Your Global Binance AI Guide
-## 🎯 [👉 XEM PITCH DECK LIVE](https://nova-slide.netlify.app)
+## 🎯 [👉 PITCH DECK LIVE](https://nova-slide.netlify.app)
 > *"Binance speaks every language. Now it finally understands yours."*
 
 [](https://github.com/binance/binance-skills-hub)
